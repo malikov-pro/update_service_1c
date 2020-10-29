@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "7eea0ffb-9dc6-4380-b268-043d8703f64d",
+		"name": "1C_update_service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"programName\": {{programName}},\r\n    \"versionNumber\": {{versionNumber}}, \r\n    \"platformVersion\": {{platformVersion}},\r\n    \"programNewName\": {{programNewName}},\r\n    \"redactionNumber\": {{redactionNumber}},\r\n    \"updateType\": {{updateType}},\r\n    \"NewProgramOrRedaction\":  {{NewProgramOrRedaction}},\r\n    \"additionalParameters\":  {{additionalParameters}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://update-api.1c.ru/update-platform/programs/update/info",
+							"protocol": "https",
+							"host": [
+								"update-api",
+								"1c",
+								"ru"
+							],
+							"path": [
+								"update-platform",
+								"programs",
+								"update",
+								"info"
+							]
+						},
+						"description": "Получение сведений о текущем актуальном обновлении для ИБ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get update file list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"programName\": {{programName}},\r\n    \"versionNumber\": {{versionNumber}}, \r\n    \"platformVersion\": {{platformVersion}},\r\n    \"programNewName\": {{programNewName}},\r\n    \"redactionNumber\": {{redactionNumber}},\r\n    \"updateType\": {{updateType}},\r\n    \"NewProgramOrRedaction\":  {{NewProgramOrRedaction}},\r\n    \"additionalParameters\":  {{additionalParameters}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://update-api.1c.ru/update-platform/programs/update/info",
+							"protocol": "https",
+							"host": [
+								"update-api",
+								"1c",
+								"ru"
+							],
+							"path": [
+								"update-platform",
+								"programs",
+								"update",
+								"info"
+							]
+						},
+						"description": "Получение сведений о текущем актуальном обновлении для ИБ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get patch list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://update-api.1c.ru/update-platform/patches/getFiles",
+							"protocol": "https",
+							"host": [
+								"update-api",
+								"1c",
+								"ru"
+							],
+							"path": [
+								"update-platform",
+								"patches",
+								"getFiles"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get config file",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dl03.1c.ru/public/file/tmplts/get/{{guid_file}}",
+					"protocol": "http",
+					"host": [
+						"dl03",
+						"1c",
+						"ru"
+					],
+					"path": [
+						"public",
+						"file",
+						"tmplts",
+						"get",
+						"{{guid_file}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
