@@ -3,11 +3,158 @@ info:
   title: API Сервиса автоматический обновлений 1С
   version: '1.0'
 servers:
-  - url: https://update-api.1c.ru
-  - url: https://update-api.1c.eu
+  - url: https://update-api.1c.ru/update-platform
+  - url: https://update-api.1c.eu/update-platform
 paths:
-  /test:
+  /programs/update/ping:
+    description: Проверка доступности сервиса
     get:
       responses:
         '200':
+          description: Успешный ответ
+  /programs/update/info:
+    description: Получение информации о доступном обновлении конфигурации и платформы
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InfoRequest'
+      responses:
+        '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResonse'
+  /programs/update/:
+    description: Файлы обновлений
+  /patches/getInfo:
+    description: Доступные исправления
+  /patches/getFiles:
+    description: Файлы исправлений
+
+components:
+  schemas:
+    additionalParameters:
+      type: object
+      properties:
+        key:
+          description: Ключ
+          type: string
+        value:
+          description: Значение
+          type: string
+      example:
+        - key: ConfigLanguage
+          value: ru
+        - key: Vendor
+          value: Фирма "1С"
+        - key: ClientPlatformType
+          value: Windows_x86
+        - key: ConfigName
+          value: БиблиотекаСтандартныхПодсистемДемо
+        - key: ClientOSVersion
+          value: Microsoft Windows 10 version 10.0  (Build 19041)
+        - key: ConfigMainLanguage
+          value: ru
+        - key: LibraryVersion
+          value: 2.4.1.36
+        - key: PlatformVersion
+          value: 8.3.17.1549
+        - key: ConfigVersion
+          value: 3.1.3.317
+        - key: IBID
+          value: 9ef71e24-e109-4e63-b12c-8af41928d659
+        - key: CurLocalizationCode
+          value: ru
+        - key: SystemLanguage
+          value: ru
+        - key: ClientTimeOffsetGMT
+          value: '18000'
+        - key: countryId
+          value: ''
+        - key: IBIsSeparated
+          value: 'false'
+        - key: IBUserName
+          value: Администратор
+        - key: DomainZone
+          value: ru
+
+    InfoRequest:
+      type: object
+      properties:
+        programName:
+          description: Имя текущей программы
+          type: string
+          example: "SSL"
+        versionNumber:
+          description: Версия текущей программы
+          type: string
+          example: "3.1.3.317"
+        platformVersion:
+          description: Текущая версия платформы 1С Предприятие
+          type: string
+          example: "8.3.17.1549"
+        programNewName:
+          description: Имя новой программы
+          type: string  
+        redactionNumber:
+          description: Номер редакции новой программы
+          type: string
+        updateType:
+          description: >
+            СценарийОбновления:
+              * `NewConfigurationAndOrPlatform` - РабочееОбновление
+              * `NewProgramOrRedaction` - ПереходНаДругуюПрограммуИлиРедакцию
+              * `NewPlatform`- Новая платформа
+          type: string
+          enum:
+            - "NewConfigurationAndOrPlatform"
+            - "NewProgramOrRedaction"
+            - "NewPlatform"
+        additionalParameters:
+            $ref: '#/components/schemas/additionalParameters'
+
+    UpdateConfigurationItem:
+      type: object
+      properties:
+        configurationVersion:
+          description: Версия
+          type: string
+        size:
+          description: Размер обновления
+          type: string
+        updateInfoUrl:
+          description: URL новое в версии
+          type: string
+        howToUpdateInfoUrl:
+          description: URL порядок обновления
+          type: string
+        programVersionUin:
+          description: Идентификатор версии
+          type: string
+        upgradeSequence:
+          description: Файлы для загрузки
+          type: array
+          items: 
+            type: string
+    InfoResonse:
+      type: object
+      properties:
+        errorName:
+          description: ИмяОшибки
+          type: string
+        errorMessage:
+          description: ИнформацияОбОшибке
+          type: string
+        configurationUpdateResponse:
+          description: Информация об обновлении конфигурации
+          type: array
+          items: 
+            $ref: '#/components/schemas/UpdateConfigurationItem'
+        platformUpdateResponse:
+          description: Информация об обновлении платформы
+          type: array
+          items: 
+            $ref: '#/components/schemas/UpdateConfigurationItem'
