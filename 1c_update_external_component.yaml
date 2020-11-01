@@ -1,0 +1,142 @@
+openapi: 3.0.2
+info:
+  title: API Сервиса получения компонент
+  version: '1.0'
+servers:
+  - url: https://external-components-manager.1c.ru/api/external-components/
+  - url: https://external-components-manager.1c.eu/api/external-components/
+
+paths:
+  /version:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResp'
+  /version/latest:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionLatestReq'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResp'
+  /version/download:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionDownloadReq'
+      responses:
+        '200':
+          description: OK, zip
+
+              
+
+components:
+  schemas:
+    VersionReq:
+      type: object
+      properties:
+        programNick:
+          type: string
+        externalComponents:
+          type: array
+          items:
+            type: object
+            properties:
+              externalComponentNick:
+                type: string
+              version:
+                type: string
+        authenticationInfo:
+          type: object
+          properties:
+            login:
+              type: string
+            password:
+              type: string
+        additionalParams:
+          type: array
+          items:
+            type: object
+    VersionResp:
+      title: Ответ
+      type: array
+      items:
+        type: object
+        properties:
+          externalComponentNick:
+            type: string
+            description: идентификатор внешней компоненты в сервисе
+          externalComponentName:
+            type: string
+            description: наименование внешней компоненты
+          version:
+            type: string
+            description: номер актуальной версии
+          fileUrl:
+            type: string
+            description: ссылка на скачивание файла актуальной версии
+          hashSum:
+            type: string
+            description: контрольная сумма файла
+          buildDate:
+            type: string
+            description: дата создания версии
+          fileSize:
+            type: string
+            description: размер файла
+          errorCode:
+            type: string
+            description: код ошибки
+    VersionLatestReq:
+      title: Запрос
+      type: object
+      properties:
+        programNick:
+          type: string
+          description: Имя программы в сервисах Интернет-поддержки
+        externalComponentNickList:
+          description:
+              содержит уникальный идентификатор внешней компоненты, 
+              который указывается пользователем при создании новой компоненты;
+          type: array
+          items:
+            type: string
+        authenticationInfo:
+          type: object
+          properties:
+            login:
+              type: string
+            password:
+              type: string
+        additionalParameters:
+          type: array
+          items:
+            type: object  
+    VersionDownloadReq:
+      type: object
+      properties:
+        programNick:
+          type: string
+        login:
+          type: string
+        password:
+          type: string 
+      

@@ -1,0 +1,13 @@
+openapi: '3.0.2'
+info:
+  title: API Сервиса автоматический обновлений 1С
+  version: '1.0'
+servers:
+  - url: https://update-api.1c.ru
+  - url: https://update-api.1c.eu
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
