@@ -1,130 +1,137 @@
 {
 	"info": {
-		"_postman_id": "7eea0ffb-9dc6-4380-b268-043d8703f64d",
-		"name": "1C_update_service",
+		"_postman_id": "3518ece4-5c3c-4c32-98c8-d76214210c1a",
+		"name": "1c_update_service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Public",
+			"name": "programs/update",
 			"item": [
 				{
-					"name": "Info",
+					"name": "/programs/update/ping",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"programName\": {{programName}},\r\n    \"versionNumber\": {{versionNumber}}, \r\n    \"platformVersion\": {{platformVersion}},\r\n    \"programNewName\": {{programNewName}},\r\n    \"redactionNumber\": {{redactionNumber}},\r\n    \"updateType\": {{updateType}},\r\n    \"NewProgramOrRedaction\":  {{NewProgramOrRedaction}},\r\n    \"additionalParameters\":  {{additionalParameters}}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "https://update-api.1c.ru/update-platform/programs/update/info",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/programs/update/ping",
 							"host": [
-								"update-api",
-								"1c",
-								"ru"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"update-platform",
 								"programs",
 								"update",
-								"info"
-							]
-						},
-						"description": "Получение сведений о текущем актуальном обновлении для ИБ"
-					},
-					"response": []
-				},
-				{
-					"name": "Get update file list",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"programName\": {{programName}},\r\n    \"versionNumber\": {{versionNumber}}, \r\n    \"platformVersion\": {{platformVersion}},\r\n    \"programNewName\": {{programNewName}},\r\n    \"redactionNumber\": {{redactionNumber}},\r\n    \"updateType\": {{updateType}},\r\n    \"NewProgramOrRedaction\":  {{NewProgramOrRedaction}},\r\n    \"additionalParameters\":  {{additionalParameters}}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://update-api.1c.ru/update-platform/programs/update/info",
-							"protocol": "https",
-							"host": [
-								"update-api",
-								"1c",
-								"ru"
-							],
-							"path": [
-								"update-platform",
-								"programs",
-								"update",
-								"info"
-							]
-						},
-						"description": "Получение сведений о текущем актуальном обновлении для ИБ"
-					},
-					"response": []
-				},
-				{
-					"name": "Get patch list",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "https://update-api.1c.ru/update-platform/patches/getFiles",
-							"protocol": "https",
-							"host": [
-								"update-api",
-								"1c",
-								"ru"
-							],
-							"path": [
-								"update-platform",
-								"patches",
-								"getFiles"
+								"ping"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Успешный ответ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/programs/update/ping",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"programs",
+										"update",
+										"ping"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/programs/update/info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"programName\": \"<string>\",\n    \"versionNumber\": \"<string>\",\n    \"platformVersion\": \"<string>\",\n    \"programNewName\": \"<string>\",\n    \"redactionNumber\": \"<string>\",\n    \"updateType\": \"<string>\",\n    \"additionalParameters\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/programs/update/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"programs",
+								"update",
+								"info"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"programName\": \"SSL\",\n    \"versionNumber\": \"3.1.3.317\",\n    \"platformVersion\": \"8.3.17.1549\",\n    \"programNewName\": \"<string>\",\n    \"redactionNumber\": \"<string>\",\n    \"updateType\": \"<string>\",\n    \"additionalParameters\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/programs/update/info",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"programs",
+										"update",
+										"info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errorName\": \"ea deserunt quis reprehenderit\",\n \"errorMessage\": \"do culpa proident\",\n \"configurationUpdateResponse\": [\n  {\n   \"configurationVersion\": \"pariatur ipsum nulla qui ex\",\n   \"size\": \"sunt\",\n   \"updateInfoUrl\": \"laboris labore\",\n   \"howToUpdateInfoUrl\": \"in velit\",\n   \"programVersionUin\": \"culpa eiusmod esse exercitation ut\",\n   \"upgradeSequence\": [\n    \"ut nostrud\",\n    \"veniam commodo\"\n   ]\n  },\n  {\n   \"configurationVersion\": \"veniam fugiat qui\",\n   \"size\": \"consequat pariatur ex dolor exercitation\",\n   \"updateInfoUrl\": \"fugiat ullamco commodo cillum\",\n   \"howToUpdateInfoUrl\": \"anim id dolor\",\n   \"programVersionUin\": \"aute laboris velit\",\n   \"upgradeSequence\": [\n    \"deserunt quis minim ipsum\",\n    \"qui\"\n   ]\n  }\n ],\n \"platformUpdateResponse\": [\n  {\n   \"configurationVersion\": \"mollit Lorem nostrud\",\n   \"size\": \"minim laboris de\",\n   \"updateInfoUrl\": \"qui culpa in ea\",\n   \"howToUpdateInfoUrl\": \"irure \",\n   \"programVersionUin\": \"sint magna non laborum\",\n   \"upgradeSequence\": [\n    \"laborum aliquip ipsum ci\",\n    \"ad ut\"\n   ]\n  },\n  {\n   \"configurationVersion\": \"id pariatur exercitation mollit\",\n   \"size\": \"aliqua sit sint\",\n   \"updateInfoUrl\": \"sunt sit\",\n   \"howToUpdateInfoUrl\": \"minim velit sed officia\",\n   \"programVersionUin\": \"consectetur \",\n   \"upgradeSequence\": [\n    \"reprehenderit amet nulla ipsum eiusmod\",\n    \"eu elit laborum aute\"\n   ]\n  }\n ]\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
-		},
+		}
+	],
+	"variable": [
 		{
-			"name": "Get config file",
-			"request": {
-				"auth": {
-					"type": "basic"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://dl03.1c.ru/public/file/tmplts/get/{{guid_file}}",
-					"protocol": "http",
-					"host": [
-						"dl03",
-						"1c",
-						"ru"
-					],
-					"path": [
-						"public",
-						"file",
-						"tmplts",
-						"get",
-						"{{guid_file}}"
-					]
-				}
-			},
-			"response": []
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://update-api.1c.ru/update-platform",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}
